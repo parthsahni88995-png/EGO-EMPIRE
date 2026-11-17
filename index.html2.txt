@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EGO EMPIRE • Protector</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #050505;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Background glow */
+    .bg-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 200, 0, 0.12) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Floating particles */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 210, 50, 0.6);
+      border-radius: 50%;
+      animation: float linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.6; }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Main Card */
+    .card {
+      position: relative;
+      z-index: 10;
+      width: 92%;
+      max-width: 460px;
+      background: rgba(15, 15, 15, 0.75);
+      border: 1px solid rgba(255, 200, 50, 0.18);
+      border-radius: 24px;
+      padding: 48px 40px 40px;
+      text-align: center;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 
+        0 0 0 1px rgba(255, 210, 60, 0.05),
+        0 25px 50px -12px rgba(0, 0, 0, 0.7),
+        0 0 80px rgba(255, 190, 0, 0.08);
+    }
+
+    /* Top accent line */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ffd700, transparent);
+      border-radius: 2px;
+    }
+
+    /* Logo */
+    .logo-wrap {
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 22px;
+      position: relative;
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, rgba(255, 210, 50, 0.25), rgba(255, 170, 0, 0.08));
+      border: 1.5px solid rgba(255, 210, 50, 0.45);
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      color: #ffd700;
+      text-shadow: 0 0 20px rgba(255, 210, 50, 0.6);
+      box-shadow: 
+        0 0 30px rgba(255, 200, 0, 0.15),
+        inset 0 0 20px rgba(255, 210, 50, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.08) 50%, transparent 60%);
+      animation: shine 4s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      50%, 100% { transform: translateX(100%); }
+    }
+
+    /* Titles */
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 26px;
+      letter-spacing: 4px;
+      color: #ffd700;
+      margin-bottom: 6px;
+      text-shadow: 0 0 30px rgba(255, 210, 50, 0.35);
+    }
+
+    .sub {
+      font-size: 12px;
+      letter-spacing: 5px;
+      color: rgba(255, 220, 100, 0.7);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+
+    .tagline {
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 5px;
+    }
+
+    .hindi {
+      font-size: 12.5px;
+      color: rgba(255, 200, 80, 0.55);
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+
+    /* Loadstring box */
+    .loadstring-box {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 200, 50, 0.15);
+      border-radius: 14px;
+      padding: 16px 18px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 11.8px;
+      color: rgba(255, 230, 150, 0.9);
+      word-break: break-all;
+      text-align: left;
+      line-height: 1.55;
+      margin-bottom: 26px;
+      max-height: 90px;
+      overflow-y: auto;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .loadstring-box::-webkit-scrollbar {
+      width: 4px;
+    }
+    .loadstring-box::-webkit-scrollbar-thumb {
+      background: rgba(255, 200, 50, 0.3);
+      border-radius: 4px;
+    }
+
+    /* Copy Button */
+    .copy-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(255, 200, 40, 0.9), rgba(255, 160, 0, 0.85));
+      border: none;
+      border-radius: 14px;
+      color: #1a1200;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 
+        0 8px 25px rgba(255, 180, 0, 0.25),
+        0 0 0 1px rgba(255, 220, 100, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .copy-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 
+        0 12px 30px rgba(255, 180, 0, 0.35),
+        0 0 0 1px rgba(255, 220, 100, 0.35);
+      background: linear-gradient(135deg, #ffd700, #ffb000);
+    }
+
+    .copy-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .copy-btn.copied {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: white;
+      box-shadow: 0 8px 25px rgba(46, 204, 113, 0.3);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 28px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: rgba(255, 200, 50, 0.35);
+      font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .card {
+        padding: 40px 28px 36px;
+      }
+      h1 {
+        font-size: 22px;
+        letter-spacing: 3px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- Particles -->
+  <div class="particle" style="left:8%; animation-duration:11s; animation-delay:0s;"></div>
+  <div class="particle" style="left:18%; animation-duration:14s; animation-delay:2s;"></div>
+  <div class="particle" style="left:32%; animation-duration:10s; animation-delay:4s;"></div>
+  <div class="particle" style="left:48%; animation-duration:13s; animation-delay:1s;"></div>
+  <div class="particle" style="left:62%; animation-duration:12s; animation-delay:3s;"></div>
+  <div class="particle" style="left:75%; animation-duration:15s; animation-delay:0.5s;"></div>
+  <div class="particle" style="left:88%; animation-duration:9s; animation-delay:5s;"></div>
+
+  <div class="card">
+    <div class="logo-wrap">
+      <div class="logo">EE</div>
+    </div>
+
+    <h1>EGO EMPIRE</h1>
+    <div class="sub">Protector</div>
+
+    <div class="tagline">This Script Protected By EGO EMPIRE</div>
+    <div class="hindi">Papa Ki Script Chori Kar Nai Sakta Bache</div>
+
+    <div class="loadstring-box" id="scriptBox">
+loadstring(game:HttpGet("https://raw.githubusercontent.com/parthsahni88995-png/EGO-EMPIRE/refs/heads/main/V8-"))()
+    </div>
+
+    <button class="copy-btn" id="copyBtn" onclick="copyScript()">
+      COPY SCRIPT
+    </button>
+
+    <div class="footer">EGO EMPIRE • V8</div>
+  </div>
+
+  <script>
+    function copyScript() {
+      const text = document.getElementById('scriptBox').innerText.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = 'COPIED ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'COPY SCRIPT';
+          btn.classList.remove('copied');
+        }, 2200);
+      }).catch(() => {
+        // Fallback for older browsers
+        const range = document.createRange();
+        range.selectNode(document.getElementById('scriptBox'));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = 'COPIED ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'COPY SCRIPT';
+          btn.classList.remove('copied');
+        }, 2200);
+      });
+    }
+  </script>
+</body>
+</html>
